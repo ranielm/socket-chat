@@ -25,7 +25,7 @@ class LoginViewController: UIViewController {
     var picsName: [String] = ["gates", "mark", "steve", "trump"]
     var picChooseIndex: Int = 0
     
-    let manager = SocketManager(socketURL: URL(string: "http://192.168.1.9:5000")!, config: [.log(true), .reconnectWait(2)])
+    let manager = SocketManager(socketURL: URL(string: "http://hml.tm2digital.com")!, config: [.log(true)])
     var socket: SocketIOClient!
     
     var gradientLayer: CAGradientLayer!
@@ -88,6 +88,7 @@ class LoginViewController: UIViewController {
                 //Load online users
                 self.socket?.on("usersConnected", callback: { (data, ack) in
                     let OnlineUsers: [[String:String]] = data[0] as! [[String:String]]
+                    print("LOGIN VIEW")
                     print("DictArray: ", OnlineUsers)
                     onlineUsers = OnlineUsers
                     myIndex = OnlineUsers.count
@@ -97,9 +98,9 @@ class LoginViewController: UIViewController {
                 
                 let transition = CATransition()
                 transition.duration = 0.35
-                transition.type = kCATransitionPush
-                transition.subtype = kCATransitionFromRight
-                transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+                transition.type = CATransitionType.push
+                transition.subtype = CATransitionSubtype.fromRight
+                transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
                 self.view.window!.layer.add(transition, forKey: kCATransition)
                 self.present(presentNavPage, animated: false, completion: {
                     isLoggedIn = true
@@ -136,6 +137,7 @@ class LoginViewController: UIViewController {
     }
     
     @objc func handleTapGesture(sender: UITapGestureRecognizer) {
+        print("ESCOLHA UM")
         print("Choose Choose Choose")
         for pic in profilePics {
             pic.layer.borderWidth = 0

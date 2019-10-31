@@ -76,7 +76,7 @@ class MessageViewController: UIViewController, GADBannerViewDelegate {
         let content = UNMutableNotificationContent()
         content.title = senderName
         content.body = message
-        content.sound = UNNotificationSound.default()
+        content.sound = UNNotificationSound.default
         content.badge = 1
         
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.01, repeats: false)
@@ -197,12 +197,12 @@ class MessageViewController: UIViewController, GADBannerViewDelegate {
     //MARK: HANDLE KEYBOARD SHOWING AND HIDE
     func addKeyboardNotification() {
         //Regester notification for show and hide keyboard purpose.
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.height == viewHeight{
                 self.view.frame.size.height -= keyboardSize.height
             }
@@ -210,7 +210,7 @@ class MessageViewController: UIViewController, GADBannerViewDelegate {
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.height != viewHeight{
                 self.view.frame.size.height += keyboardSize.height
             }
