@@ -84,6 +84,7 @@ PODS:
   - nanopb/encode (0.3.9011)
   - SocketIO (0.0.1):
     - Emitter
+  - SwiftSocket (2.0.2)
 
 DEPENDENCIES:
   - Firebase (~> 6.11)
@@ -93,6 +94,7 @@ DEPENDENCIES:
   - FirebaseCore (from `https://github.com/firebase/firebase-ios-sdk.git`, branch `master`)
   - Google-Mobile-Ads-SDK (~> 7.51)
   - SocketIO
+  - SwiftSocket
 
 SPEC REPOS:
   trunk:
@@ -113,6 +115,7 @@ SPEC REPOS:
     - GTMSessionFetcher
     - nanopb
     - SocketIO
+    - SwiftSocket
 
 EXTERNAL SOURCES:
   FirebaseCore:
@@ -143,7 +146,8 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 43b8b64263023d4f32caa0b40f4c8bfa3c5f36d8
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   SocketIO: 52f4b693419f30f831ac567dc306575384128920
+  SwiftSocket: 6f4c9c63fbc5c1d61188936bb3c599fd546f40ae
 
-PODFILE CHECKSUM: 42492b33fe9dadf1de60f1c00b33c9263214a4df
+PODFILE CHECKSUM: b712f196442683a401c87a92bd304c1b6af3d572
 
 COCOAPODS: 1.8.4

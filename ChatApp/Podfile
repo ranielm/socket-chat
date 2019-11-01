@@ -25,6 +25,7 @@ target 'SocketApp' do
   pod 'Firebase/Auth'
   pod 'Firebase/Core'
   pod 'FirebaseCore', :git => 'https://github.com/firebase/firebase-ios-sdk.git', :branch => 'master'
+  pod 'SwiftSocket'
   # pod 'Firebase/Firestor'
   # pod 'FirebaseFirestore', :git => 'https://github.com/firebase/firebase-ios-sdk.git', :branch => 'master'
   # pod 'FirebaseCore', :path => '/path/to/firebase-ios-sdk'

@@ -3,7 +3,7 @@ var socket = require('socket.io');
 
 //App setup
 var app = express();
-var server = app.listen(5000, '192.168.1.9'); //Replace this ip address with your
+var server = app.listen(5000, 'localhost'); //Replace this ip address with your
 
 //Socket setup
 var io = socket(server);

@@ -25,24 +25,35 @@ class LoginViewController: UIViewController {
     var picsName: [String] = ["gates", "mark", "steve", "trump"]
     var picChooseIndex: Int = 0
     
-    let manager = SocketManager(socketURL: URL(string: "http://localhost:3000")!, config: nil)
-    var socket:SocketIOClient!
+    //    let manager = SocketManager(socketURL: URL(string: "http://chat.chhaileng.com:1111")!, config: [.log(true), .path("/"), .connectParams(["token": "ABC438s"])])
+//    let manager = SocketManager(socketURL: URL(string: "http://localhost:3150")!, config: [.log(true), .path("/")])
+//    var socket:SocketIOClient!
+    
+    static let manager = SocketManager(socketURL: URL(string: "http://localhost:5000")!, config: [.log(true), .compress])
+    static let socket = manager.defaultSocket
     var gradientLayer: CAGradientLayer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.socket = manager.defaultSocket;
-        self.setSocketEvents();
-        self.socket.connect();
+        LoginViewController.self.manager.config = SocketIOClientConfiguration( arrayLiteral: .connectParams(["token": "adssada"]), .secure(true))
+        LoginViewController.socket.connect()
+        print("\(LoginViewController.self.isSocketConnected())")
+    }
+    
+    class func isSocketConnected() -> Bool{
+        if socket.status == .connected {
+            return true
+        }
+        return false
     }
     
     private func setSocketEvents()
     {
-        self.socket.on(clientEvent: .connect) {data, ack in
+        LoginViewController.self.socket.on(clientEvent: .connect) {data, ack in
             print("socket connected");
         };
         
-        self.socket.on("headlines_updated") {data, ack in
+        LoginViewController.self.socket.on("headlines_updated") {data, ack in
             print("adsuhadhusah")
         };
     };
@@ -81,17 +92,17 @@ class LoginViewController: UIViewController {
                 //Load Friends List VC
                 let presentPage = self.storyboard?.instantiateViewController(withIdentifier: "FriendsListViewController") as! FriendsListViewController
                 presentPage.userName = userName
-                presentPage.socket = self.socket
+                presentPage.socket = LoginViewController.self.socket
                 
                 //Store self socket Id
-                self.socket.on("myId", callback: { (data, ack) in
+                LoginViewController.self.socket.on("myId", callback: { (data, ack) in
                     if let data = data[0] as? String {
                         myId = data
                     }
                 })
                 
                 //Load online users
-                self.socket?.on("usersConnected", callback: { (data, ack) in
+                LoginViewController.self.socket.on("usersConnected", callback: { (data, ack) in
                     let OnlineUsers: [[String:String]] = data[0] as! [[String:String]]
                     print("LOGIN VIEW")
                     print("DictArray: ", OnlineUsers)
@@ -118,12 +129,12 @@ class LoginViewController: UIViewController {
     //MARK: CONNECT TO SOCKET
     //Using completion handler to make sure the FriendsListViewController only load when connect was succeed.
     func connectSocket(userName: String, completion: @escaping () -> ()) {
-        socket.on(clientEvent: .connect) { (data, ack) in
+        LoginViewController.socket.on(clientEvent: .connect) { (data, ack) in
             completion()
             let picName = self.picsName[self.picChooseIndex]
-            self.socket.emit("connectName", userName, picName)
+            LoginViewController.self.socket.emit("connectName", userName, picName)
         }
-        socket.connect()
+        LoginViewController.socket.connect()
     }
     
     
