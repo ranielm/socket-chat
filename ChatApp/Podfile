@@ -4,29 +4,12 @@ platform :ios, '13.2'
 use_frameworks!
 
 target 'SocketApp' do
-  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
-  # use_frameworks!
-  # Pods for SocketApp
-  #target 'SocketAppTests' do
-  #  inherit! :search_paths
-  # Pods for testing
-  # end
-  # target 'SocketAppUITests' do
-  # inherit! :search_paths
-  # Pods for testing
-  # end
   pod 'SocketIO'
   pod 'Google-Mobile-Ads-SDK', '~> 7.51'
-  # Add the Firebase pod for Google Analytics
-  # Add the pods for any other Firebase products you want to use in your app
-  # For example, to use Firebase Authentication and Cloud Firestore
   pod 'Firebase', '~> 6.11'
   pod 'Firebase/Analytics'
   pod 'Firebase/Auth'
   pod 'Firebase/Core'
   pod 'FirebaseCore', :git => 'https://github.com/firebase/firebase-ios-sdk.git', :branch => 'master'
   pod 'SwiftSocket'
-  # pod 'Firebase/Firestor'
-  # pod 'FirebaseFirestore', :git => 'https://github.com/firebase/firebase-ios-sdk.git', :branch => 'master'
-  # pod 'FirebaseCore', :path => '/path/to/firebase-ios-sdk'
 end

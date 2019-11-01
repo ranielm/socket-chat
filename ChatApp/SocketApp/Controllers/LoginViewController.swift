@@ -1,66 +1,33 @@
-//
-//  LoginViewController.swift
-//  SocketApp
-//
-//  Created by Phung Duy Thinh on 7/21/18.
-//  Copyright © 2018 Phung Duy Thinh. All rights reserved.
-//
-
 import UIKit
 import SocketIO
+import SwiftSocket
 
 class LoginViewController: UIViewController {
     @IBOutlet weak var pic1: UIImageView!
     @IBOutlet weak var pic2: UIImageView!
     @IBOutlet weak var pic3: UIImageView!
     @IBOutlet weak var pic4: UIImageView!
-    
     @IBOutlet weak var userNameTextInput: UITextField!
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var logInButton: UIButton!
     @IBOutlet weak var fillUsernameNotice: UILabel!
     @IBOutlet weak var chooseProfilePicNotice: UILabel!
+    let host = "apple.com"
+    let port = 80
+    var client: TCPClient?
     
     var profilePics: [UIImageView] = []
     var picsName: [String] = ["gates", "mark", "steve", "trump"]
     var picChooseIndex: Int = 0
     
-    //    let manager = SocketManager(socketURL: URL(string: "http://chat.chhaileng.com:1111")!, config: [.log(true), .path("/"), .connectParams(["token": "ABC438s"])])
-//    let manager = SocketManager(socketURL: URL(string: "http://localhost:3150")!, config: [.log(true), .path("/")])
-//    var socket:SocketIOClient!
-    
-    static let manager = SocketManager(socketURL: URL(string: "http://localhost:5000")!, config: [.log(true), .compress])
-    static let socket = manager.defaultSocket
     var gradientLayer: CAGradientLayer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        LoginViewController.self.manager.config = SocketIOClientConfiguration( arrayLiteral: .connectParams(["token": "adssada"]), .secure(true))
-        LoginViewController.socket.connect()
-        print("\(LoginViewController.self.isSocketConnected())")
     }
-    
-    class func isSocketConnected() -> Bool{
-        if socket.status == .connected {
-            return true
-        }
-        return false
-    }
-    
-    private func setSocketEvents()
-    {
-        LoginViewController.self.socket.on(clientEvent: .connect) {data, ack in
-            print("socket connected");
-        };
-        
-        LoginViewController.self.socket.on("headlines_updated") {data, ack in
-            print("adsuhadhusah")
-        };
-    };
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         createGradientLayer()
     }
     
@@ -92,23 +59,6 @@ class LoginViewController: UIViewController {
                 //Load Friends List VC
                 let presentPage = self.storyboard?.instantiateViewController(withIdentifier: "FriendsListViewController") as! FriendsListViewController
                 presentPage.userName = userName
-                presentPage.socket = LoginViewController.self.socket
-                
-                //Store self socket Id
-                LoginViewController.self.socket.on("myId", callback: { (data, ack) in
-                    if let data = data[0] as? String {
-                        myId = data
-                    }
-                })
-                
-                //Load online users
-                LoginViewController.self.socket.on("usersConnected", callback: { (data, ack) in
-                    let OnlineUsers: [[String:String]] = data[0] as! [[String:String]]
-                    print("LOGIN VIEW")
-                    print("DictArray: ", OnlineUsers)
-                    onlineUsers = OnlineUsers
-                    myIndex = OnlineUsers.count
-                })
                 
                 let presentNavPage = UINavigationController(rootViewController: presentPage)
                 
@@ -129,12 +79,7 @@ class LoginViewController: UIViewController {
     //MARK: CONNECT TO SOCKET
     //Using completion handler to make sure the FriendsListViewController only load when connect was succeed.
     func connectSocket(userName: String, completion: @escaping () -> ()) {
-        LoginViewController.socket.on(clientEvent: .connect) { (data, ack) in
-            completion()
-            let picName = self.picsName[self.picChooseIndex]
-            LoginViewController.self.socket.emit("connectName", userName, picName)
-        }
-        LoginViewController.socket.connect()
+
     }
     
     
