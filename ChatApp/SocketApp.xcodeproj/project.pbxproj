@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		26937F4E760FF6F8B0499155 /* Pods_SocketApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E7798501471E410B4AD7B5D /* Pods_SocketApp.framework */; };
 		E265FEF2236B4F9400BFFFCD /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E265FEF1236B4F9400BFFFCD /* Default-568h@2x.png */; };
+		E2679B88236BB7A9008A2FFF /* Pods_SocketApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E7798501471E410B4AD7B5D /* Pods_SocketApp.framework */; };
+		E2679B89236BB7A9008A2FFF /* Pods_SocketApp.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6E7798501471E410B4AD7B5D /* Pods_SocketApp.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E2A8DB35236B05CE00B0C0C9 /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = E2A8DB34236B05CE00B0C0C9 /* SocketIO */; };
 		FB26B64D210A1E21000E0628 /* CustomSenderMesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB26B64C210A1E21000E0628 /* CustomSenderMesCell.swift */; };
 		FB3AE464211AF40300B6FD2A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FB3AE463211AF40300B6FD2A /* GoogleService-Info.plist */; };
@@ -25,6 +26,20 @@
 		FBB67611210335A900E8B1CE /* StaticVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB67610210335A900E8B1CE /* StaticVariables.swift */; };
 		FBB67613210346A900E8B1CE /* CustomReceiverMesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB67612210346A900E8B1CE /* CustomReceiverMesCell.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E2679B8A236BB7AA008A2FFF /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				E2679B89236BB7A9008A2FFF /* Pods_SocketApp.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		5F033620C905583C162D7F1E /* Pods-SocketApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocketApp.release.xcconfig"; path = "Target Support Files/Pods-SocketApp/Pods-SocketApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -55,7 +70,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2A8DB35236B05CE00B0C0C9 /* SocketIO in Frameworks */,
-				26937F4E760FF6F8B0499155 /* Pods_SocketApp.framework in Frameworks */,
+				E2679B88236BB7A9008A2FFF /* Pods_SocketApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,6 +179,7 @@
 				FB82AB4D20E9CB3500F1A90C /* Frameworks */,
 				FB82AB4E20E9CB3500F1A90C /* Resources */,
 				87A7D6D5A6ED350B9DF691E8 /* [CP] Embed Pods Frameworks */,
+				E2679B8A236BB7AA008A2FFF /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -436,7 +452,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T2GY9NVJ8A;
 				INFOPLIST_FILE = SocketApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -444,7 +460,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = gogoing.company.SocketApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -456,7 +472,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T2GY9NVJ8A;
 				INFOPLIST_FILE = SocketApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -465,7 +481,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = gogoing.company.SocketApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

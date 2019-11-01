@@ -25,22 +25,27 @@ class LoginViewController: UIViewController {
     var picsName: [String] = ["gates", "mark", "steve", "trump"]
     var picChooseIndex: Int = 0
     
-    let manager = SocketManager(socketURL: URL(string: "http://hml.tm2digital.com")!, config: [.log(true)])
-    var socket: SocketIOClient!
-    
+    let manager = SocketManager(socketURL: URL(string: "http://localhost:3000")!, config: nil)
+    var socket:SocketIOClient!
     var gradientLayer: CAGradientLayer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        socket = manager.defaultSocket
-        chooseProfilePic()
-        loginButtonConfig()
-        hideKeyboardWhenTappedAround()
-        
-        fillUsernameNotice.text = ""
-        chooseProfilePicNotice.text = ""
+        self.socket = manager.defaultSocket;
+        self.setSocketEvents();
+        self.socket.connect();
     }
+    
+    private func setSocketEvents()
+    {
+        self.socket.on(clientEvent: .connect) {data, ack in
+            print("socket connected");
+        };
+        
+        self.socket.on("headlines_updated") {data, ack in
+            print("adsuhadhusah")
+        };
+    };
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

@@ -1423,7 +1423,10 @@ function Socket(uri, opts){
   this.forceBase64 = !!opts.forceBase64;
   this.timestampParam = opts.timestampParam || 't';
   this.timestampRequests = opts.timestampRequests;
-  this.transports = opts.transports || ['polling', 'websocket'];
+  this.transports = opts.transports || ['websocket', 'xdr-streaming', 'xhr-streaming',
+  'iframe-eventsource', 'iframe-htmlfile',
+  'xdr-polling', 'xhr-polling', 'iframe-xhr-polling',
+  'jsonp-polling'];
   this.readyState = '';
   this.writeBuffer = [];
   this.callbackBuffer = [];
